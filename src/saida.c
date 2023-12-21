@@ -4,8 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void escreverArquivoSaida(const char *resultados, int resultado, Transacao *transacao, char *letras) 
-{
+void escreverArquivoSaida(const char *resultados, int resultado, Transacao *transacao, char *letras) {
     // Abra o arquivo no diretório desejado (../text/)
     FILE *arquivoSaida = fopen("../text/resultados.txt", "w");
     if (!arquivoSaida) {
@@ -13,21 +12,20 @@ void escreverArquivoSaida(const char *resultados, int resultado, Transacao *tran
         return;
     }
 
-    fprintf(arquivoSaida, "Saída:\n");
-
-    for (int i = 0; i < strlen(letras); i++) {
-        char letra = letras[i];
-        fprintf(arquivoSaida, "%c:%d\n", letra, transacao->correspondencia[letra - 'A']);
+    if (resultado == -1) {
+        // Caso não seja possível decifrar a transação
+        fprintf(arquivoSaida, "-1\n");
+    } else {
+        // Caso seja possível decifrar a transação
+        fprintf(arquivoSaida, "%d\n", resultado);
+        imprimirResultado(arquivoSaida, transacao, letras);
     }
-
-    fprintf(arquivoSaida, "Resultado da decifração: %d\n", resultado);
-    imprimirResultado(arquivoSaida, transacao, letras);
 
     fclose(arquivoSaida);
 }
-void imprimirResultado(FILE *saida, Transacao *transacao, char *letras) {
-    fprintf(saida, "Saída:\n");
 
+void imprimirResultado(FILE *saida, Transacao *transacao, char *letras) {
+  
     for (int i = 0; i < strlen(letras); i++) {
         char letra = letras[i];
         fprintf(saida, "%c:%d\n", letra, transacao->correspondencia[letra - 'A']);

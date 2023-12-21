@@ -13,7 +13,6 @@ int main(int argc, char *argv[]) {
     argv[1] = "../text/codigos.txt";
     argv[2] = "../text/resultados.txt";
 
-
     Transacao transacao;
     char letras[26];
 

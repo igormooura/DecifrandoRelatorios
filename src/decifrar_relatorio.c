@@ -30,6 +30,8 @@ void determinarLetras(Transacao *transacao, char *letras) {
 }
 
 int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FILE *arquivoSaida) {
+    static int maiorResultado = -1;  // Variável estática para rastrear o maior resultado
+
     if (letras[letraAtualIdx] == '\0') {
         int valorA = 0, valorB = 0, valorC = 0;
 
@@ -45,15 +47,15 @@ int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FIL
             valorC = valorC * 10 + transacao->correspondencia[transacao->C[i] - 'A'];
         }
 
-        if (valorA + valorB == valorC) {
-            fprintf(arquivoSaida, "%d\n", valorC);
+        if (valorA + valorB == valorC && valorC > maiorResultado) {
+            maiorResultado = valorC;  // Atualize o maior resultado encontrado
+            // Limpe o arquivo de saída antes de escrever a nova solução
+            fseek(arquivoSaida, 0, SEEK_SET);
+            fprintf(arquivoSaida, "%d\n", maiorResultado);
             imprimirResultado(arquivoSaida, transacao, letras);
-            // Remova o exit(0) para continuar verificando outras soluções
-            // exit(0);
-            return 1;  // Adicionamos um retorno para indicar que encontramos uma solução
         }
 
-        return -1;
+        return -1;  // Remova o retorno 1 para continuar verificando outras soluções
     }
 
     int resposta = -1;
@@ -85,4 +87,5 @@ int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FIL
 
     return resposta;
 }
+
 
