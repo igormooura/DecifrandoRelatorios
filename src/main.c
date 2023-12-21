@@ -7,10 +7,8 @@
 #include <string.h>
 
 int decifrarTransacao(Transacao *transacao, char *letras, FILE *arquivoSaida) {
-    // Chame a função de decifração aqui
     int resultado = decifrarRelatorio(transacao, letras, 0, arquivoSaida);
 
-    // Escreva os resultados no arquivo de saída
     escreverArquivoSaida(resultado, transacao, letras);
 
     return resultado;
@@ -37,8 +35,6 @@ int main(int argc, char *argv[]) {
         reportError("Erro ao abrir o arquivo de saída %s.\n");
         return 1;
     }
-
-    // Chame a função decifrarTransacao diretamente aqui
     decifrarTransacao(&transacao, letras, arquivoSaida);
 
     fclose(arquivoSaida);

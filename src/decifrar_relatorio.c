@@ -9,7 +9,6 @@ void determinarLetras(Transacao *transacao, char *letras) {
     size_t i, j;
     int letraPresente[26] = {0};
 
-    // Marcar letras presentes em A, B e C
     for (i = 0; i < strlen(transacao->A); i++) {
         letraPresente[transacao->A[i] - 'A'] = 1;
     }
@@ -48,14 +47,13 @@ int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, 
         }
 
         if (valorA + valorB == valorC && valorC > maiorResultado) {
-            maiorResultado = valorC;  // Atualize o maior resultado encontrado
-            // Limpe o arquivo de saída antes de escrever a nova solução
+            maiorResultado = valorC;  
             fseek(arquivoSaida, 0, SEEK_SET);
             fprintf(arquivoSaida, "%d\n", maiorResultado);
             imprimirResultado(arquivoSaida, transacao, letras);
         }
 
-        return -1;  // Remova o retorno 1 para continuar verificando outras soluções
+        return -1;  
     }
 
     int resposta = -1;

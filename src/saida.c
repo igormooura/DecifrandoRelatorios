@@ -6,7 +6,6 @@
 #include <string.h>
 
 void escreverArquivoSaida(int resultado, Transacao *transacao, char *letras) {
-    // Abra o arquivo no diretório desejado (../text/)
     FILE *arquivoSaida = fopen("./text/resultados.txt", "w");
     if (!arquivoSaida) {
         reportError("Erro ao abrir o arquivo de saída.\n");
@@ -14,10 +13,8 @@ void escreverArquivoSaida(int resultado, Transacao *transacao, char *letras) {
     }
 
     if (resultado == -1) {
-        // Caso não seja possível decifrar a transação
         fprintf(arquivoSaida, "-1\n");
     } else {
-        // Caso seja possível decifrar a transação
         fprintf(arquivoSaida, "%d\n", resultado);
         imprimirResultado(arquivoSaida, transacao, letras);
     }
