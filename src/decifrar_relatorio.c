@@ -28,7 +28,7 @@ void determinarLetras(Transacao *transacao, char *letras) {
     letras[j] = '\0';
 }
 
-int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida) {
+int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida, char *A, char *B, char *C) {
     static int maiorResultado = -1;  // Variável estática para rastrear o maior resultado
 
     if (letras[letraAtualIdx] == '\0') {
@@ -74,7 +74,12 @@ int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, 
 
         transacao->correspondencia[letras[letraAtualIdx] - 'A'] = numero;
 
-        int retorno = decifrarRelatorio(transacao, letras, letraAtualIdx + 1, arquivoSaida);
+        if (transacao->correspondencia[A[0] - 'A'] == 0 || transacao->correspondencia[B[0] - 'A'] == 0 || transacao->correspondencia[C[0] - 'A'] == 0) {
+            transacao->correspondencia[letras[letraAtualIdx] - 'A'] = -1;
+            continue;
+        }
+
+        int retorno = decifrarRelatorio(transacao, letras, letraAtualIdx + 1, arquivoSaida, A, B, C);
 
         if (retorno > resposta) {
             resposta = retorno;
@@ -84,4 +89,16 @@ int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, 
     }
 
     return resposta;
+}
+
+int decifrarTransacao(Transacao *transacao, char *letras, FILE *arquivoSaida) {
+    char *A = transacao->A;  // replace with the actual member names if necessary
+    char *B = transacao->B;
+    char *C = transacao->C;
+
+    int resultado = decifrarRelatorio(transacao, letras, 0, arquivoSaida, A, B, C);
+
+    escreverArquivoSaida(resultado, transacao, letras);
+
+    return resultado;
 }

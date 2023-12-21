@@ -6,6 +6,9 @@ O trabalho é inspirado em cryptarithmetic
 O arquivo de entrada entrada possui três linhas com as palavras A, B e C, as quais descrevem uma transação, isto é, C equivale à soma de A e B. É garantido que as palavras não ultrapassam 8 caracteres e que o número de caracteres distintos nas três palavras é no máximo 7.
 
 ## Arquivo de saída
+A primeira linha do arquivo de saída deve possuir o maior valor possível de C. Caso
+não seja possível decifrar a transação, o valor a ser impresso é “-1”, senão, as próximas
+linhas devem descrever a correspondência utilizada para obter os números da transação.
 Cada uma destas linhas está no formato“c : d” em que c corresponde a uma letra e d
 corresponde a um algarismo.
 No caso em que seja possível decifrar o relatório, as correspondências podem ser dadas

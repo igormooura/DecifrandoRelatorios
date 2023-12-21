@@ -6,14 +6,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-int decifrarTransacao(Transacao *transacao, char *letras, FILE *arquivoSaida) {
-    int resultado = decifrarRelatorio(transacao, letras, 0, arquivoSaida);
-
-    escreverArquivoSaida(resultado, transacao, letras);
-
-    return resultado;
-}
-
 int main(int argc, char *argv[]) {
     if (argc != 3) {
         reportError("Uso: %s <codigos.txt> <resultados.txt>\n");

@@ -11,6 +11,7 @@ typedef struct {
 } Transacao;
 
 void determinarLetras(Transacao *transacao, char *letras);
-int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida);
+int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida, char *A, char *B, char *C);
+int decifrarTransacao(Transacao *transacao, char *letras, FILE *arquivoSaida);
 
 #endif
