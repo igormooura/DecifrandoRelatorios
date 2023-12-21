@@ -1,16 +1,17 @@
 #include "../include/leitura.h"
+#include "../include/erros.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int lerArquivoEntrada(const char *codigos, Transacao *transacao) {
-    FILE *arquivoEntrada = fopen("../text/codigos.txt", "r");
+int lerArquivoEntrada(const char *caminho, Transacao *transacao) {
+    FILE *arquivoEntrada = fopen(caminho, "r");
     if (!arquivoEntrada) {
-        fprintf(stderr, "Erro ao abrir o arquivoEntrada de entrada.\n");
+        reportError("Erro ao abrir o arquivo de entrada.\n");
         return 0;  // Indica falha
     }
 
-    // Implemente a leitura dos dados do arquivoEntrada de entrada
+    // Implemente a leitura dos dados do arquivo de entrada
     // Exemplo:
     fscanf(arquivoEntrada, "%s", transacao->A);
     fscanf(arquivoEntrada, "%s", transacao->B);

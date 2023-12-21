@@ -3,7 +3,7 @@
 
 #include "decifrar_relatorio.h"
 
-void escreverArquivoSaida(const char *resultados, int resultado, Transacao *transacao, char *letras);
+void escreverArquivoSaida(int resultado, Transacao *transacao, char *letras);
 void imprimirResultado(FILE *saida, Transacao *transacao, char *letras);
 
-#endif
+#endif  // SAIDA_H

@@ -1,11 +1,12 @@
 #include "../include/decifrar_relatorio.h"
 #include "../include/saida.h"
+#include "../include/erros.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 void determinarLetras(Transacao *transacao, char *letras) {
-    int i, j;
+    size_t i, j;
     int letraPresente[26] = {0};
 
     // Marcar letras presentes em A, B e C
@@ -19,7 +20,6 @@ void determinarLetras(Transacao *transacao, char *letras) {
         letraPresente[transacao->C[i] - 'A'] = 1;
     }
 
-    // Preencher 'letras' com letras presentes, na ordem de A, B e C
     j = 0;
     for (i = 0; i < 26; i++) {
         if (letraPresente[i]) {
@@ -29,21 +29,21 @@ void determinarLetras(Transacao *transacao, char *letras) {
     letras[j] = '\0';
 }
 
-int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FILE *arquivoSaida) {
+int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida) {
     static int maiorResultado = -1;  // Variável estática para rastrear o maior resultado
 
     if (letras[letraAtualIdx] == '\0') {
         int valorA = 0, valorB = 0, valorC = 0;
 
-        for (int i = 0; i < strlen(transacao->A); i++) {
+        for (size_t i = 0; i < strlen(transacao->A); i++) {
             valorA = valorA * 10 + transacao->correspondencia[transacao->A[i] - 'A'];
         }
 
-        for (int i = 0; i < strlen(transacao->B); i++) {
+        for (size_t i = 0; i < strlen(transacao->B); i++) {
             valorB = valorB * 10 + transacao->correspondencia[transacao->B[i] - 'A'];
         }
 
-        for (int i = 0; i < strlen(transacao->C); i++) {
+        for (size_t i = 0; i < strlen(transacao->C); i++) {
             valorC = valorC * 10 + transacao->correspondencia[transacao->C[i] - 'A'];
         }
 
@@ -63,7 +63,7 @@ int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FIL
     for (int numero = 0; numero <= 9; numero++) {
         int atribuido = 0;
 
-        for (int i = 0; i < 26; i++) {
+        for (size_t i = 0; i < 26; i++) {
             if (transacao->correspondencia[i] == numero) {
                 atribuido = 1;
                 break;
@@ -87,5 +87,3 @@ int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FIL
 
     return resposta;
 }
-
-

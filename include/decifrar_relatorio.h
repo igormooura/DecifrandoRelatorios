@@ -4,13 +4,13 @@
 #include <stdio.h>
 
 typedef struct {
-    char A[26];
-    char B[26];
-    char C[26];
+    char A[9];
+    char B[9];
+    char C[9];
     int correspondencia[26];
 } Transacao;
 
 void determinarLetras(Transacao *transacao, char *letras);
-int decifrarRelatorio(Transacao *transacao, char *letras, int letraAtualIdx, FILE *arquivoSaida);
+int decifrarRelatorio(Transacao *transacao, char *letras, size_t letraAtualIdx, FILE *arquivoSaida);
 
 #endif

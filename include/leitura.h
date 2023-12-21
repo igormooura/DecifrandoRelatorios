@@ -5,4 +5,4 @@
 
 int lerArquivoEntrada(const char *caminho, Transacao *transacao);
 
-#endif  // LEITURA_H
+#endif
