@@ -1,36 +1,35 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "../include/decifrar_relatorio.h"
 #include "../include/saida.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
-void imprimirResultados(const char *resultados, const Transacao *transacao, char letraMaxima) {
+void escreverArquivoSaida(const char *resultados, int resultado, Transacao *transacao, char *letras) 
+{
+    // Abra o arquivo no diretório desejado (../text/)
     FILE *arquivoSaida = fopen("../text/resultados.txt", "w");
-
-    if (arquivoSaida == NULL) {
-        perror("Erro ao abrir o arquivo de saída");
-        exit(EXIT_FAILURE);
+    if (!arquivoSaida) {
+        fprintf(stderr, "Erro ao abrir o arquivo de saída.\n");
+        return;
     }
 
-    // Redireciona a saída para o arquivo
-    fprintf(arquivoSaida, "Resultado da decifração:\n");
+    fprintf(arquivoSaida, "Saída:\n");
 
-    int i;
-    int lenC = strlen(transacao->C);
-
-    // Imprime o valor decifrado
-    for (i = 0; i < lenC; i++) {
-        fprintf(arquivoSaida, "%d", transacao->correspondencia[transacao->C[i] - 'A']);
-    }
-    fprintf(arquivoSaida, "\n");
-
-    // Imprime as correspondências
-    fprintf(arquivoSaida, "Correspondências utilizadas:\n");
-    for (i = 0; i <= letraMaxima - 'A'; i++) {
-        if (transacao->correspondencia[i] != -1) {
-            fprintf(arquivoSaida, "%c:%d\n", i + 'A', transacao->correspondencia[i]);
-        }
+    for (int i = 0; i < strlen(letras); i++) {
+        char letra = letras[i];
+        fprintf(arquivoSaida, "%c:%d\n", letra, transacao->correspondencia[letra - 'A']);
     }
 
-    // Fecha o arquivo
+    fprintf(arquivoSaida, "Resultado da decifração: %d\n", resultado);
+    imprimirResultado(arquivoSaida, transacao, letras);
+
     fclose(arquivoSaida);
+}
+void imprimirResultado(FILE *saida, Transacao *transacao, char *letras) {
+    fprintf(saida, "Saída:\n");
+
+    for (int i = 0; i < strlen(letras); i++) {
+        char letra = letras[i];
+        fprintf(saida, "%c:%d\n", letra, transacao->correspondencia[letra - 'A']);
+    }
 }

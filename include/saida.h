@@ -1,10 +1,9 @@
 #ifndef SAIDA_H
 #define SAIDA_H
 
-#include "../include/processamento.h"
+#include "decifrar_relatorio.h"
 
-// Função responsável por imprimir os resultados em um arquivo texto
-void imprimirResultados(const char *resultados, const Transacao *transacao, char letraMaxima);
-
+void escreverArquivoSaida(const char *resultados, int resultado, Transacao *transacao, char *letras);
+void imprimirResultado(FILE *saida, Transacao *transacao, char *letras);
 
 #endif

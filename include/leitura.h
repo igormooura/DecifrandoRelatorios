@@ -1,13 +1,8 @@
-#ifndef ENTRADA_H
-#define ENTRADA_H
+#ifndef LEITURA_H
+#define LEITURA_H
 
-typedef struct {
-    char A[9];
-    char B[9];
-    char C[9];
-    int correspondencia[26];  // Nova adição
-} Transacao;
+#include "decifrar_relatorio.h"
 
-void lerRelatorios(const char *codigos, Transacao *transacao);
+int lerArquivoEntrada(const char *caminho, Transacao *transacao);
 
-#endif
+#endif  // LEITURA_H
